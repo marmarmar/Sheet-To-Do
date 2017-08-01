@@ -4,6 +4,7 @@ namespace Sheet_To_Do.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using Sheet_To_Do.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Sheet_To_Do.Models.SheetToDoContext>
     {
@@ -15,18 +16,13 @@ namespace Sheet_To_Do.Migrations
 
         protected override void Seed(Sheet_To_Do.Models.SheetToDoContext context)
         {
-            //  This method will be called after migrating to the latest version.
+                context.Tasks.AddOrUpdate(
+                  new Task { Title = "Go to codecool" },
+                  new Task { Title = "Buy some milk" },
+                  new Task { Title = "Go to movie" },
+                  new Task { Title = "Create over app" }
+                );
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
         }
     }
 }
