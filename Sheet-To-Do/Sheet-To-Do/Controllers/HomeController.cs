@@ -12,13 +12,12 @@ namespace Sheet_To_Do.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            List<Task> tasks = null;
             using (var db = new SheetToDoContext())
             {
-                var dupa = new Task { Title = "obejrzec kotki" };
-                db.Tasks.Add(dupa);
-                db.SaveChanges();
+                tasks = db.Tasks.ToList();
             }
-            return View();
+            return View(tasks);
         }
     }
 }
