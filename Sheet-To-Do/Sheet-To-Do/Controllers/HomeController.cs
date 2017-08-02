@@ -25,17 +25,14 @@ namespace Sheet_To_Do.Controllers
             using (var db = new SheetToDoContext())
             {
                 Task task = db.Tasks.Find(id);
-                if (task.Done)
+                if (task != null)
                 {
-                    task.Done = false;
+                    task.Done = task.Done ? false : true;
                     db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                else if (!task.Done)
-                {
-                    task.Done = true;
-                    db.SaveChanges();
-                }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index"); // TODO: make error page inform about error
+
             }
         }
     }
