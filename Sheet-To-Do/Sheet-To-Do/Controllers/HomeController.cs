@@ -19,5 +19,24 @@ namespace Sheet_To_Do.Controllers
             }
             return View(tasks);
         }
+
+        public ActionResult ChangeState(int? id)
+        {
+            using (var db = new SheetToDoContext())
+            {
+                Task task = db.Tasks.Find(id);
+                if (task.Done)
+                {
+                    task.Done = false;
+                    db.SaveChanges();
+                }
+                else if (!task.Done)
+                {
+                    task.Done = true;
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

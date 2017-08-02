@@ -32,7 +32,9 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Done)
+            @if(item.Done) {@Html.ActionLink("Done", "ChangeState", new { id = item.Id })}
+            @if (!item.Done){@Html.ActionLink("Not Done", "ChangeState", new { id = item.Id })}
+
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
