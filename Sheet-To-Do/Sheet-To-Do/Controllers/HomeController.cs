@@ -13,10 +13,10 @@ namespace Sheet_To_Do.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            List<Task> tasks = null;
+            List<Task> tasks;
             using (var db = new SheetToDoContext())
             {
-                tasks = db.Tasks.ToList();
+              tasks = db.Tasks.Where(task => !task.Archived).ToList();
             }
             return View(tasks);
         }
@@ -70,7 +70,21 @@ namespace Sheet_To_Do.Controllers
             return View(task);
         }
 
+        public ActionResult Archive(int? id)
+        {
+            using (var db = new SheetToDoContext())
+            {
+                Task task = db.Tasks.Find(id);
+                if (task != null)
+                {
+                    task.Archived = true;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return RedirectToAction("Index"); // TODO: make error page inform about error
 
+            }
+        }
 
     }
 }
