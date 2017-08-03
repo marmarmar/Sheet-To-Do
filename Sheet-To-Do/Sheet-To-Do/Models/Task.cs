@@ -15,5 +15,6 @@ namespace Sheet_To_Do.Models
 
         public string Description { get; set; }
         public bool Done { get; set; }
+        public bool Archived { get; set; }
     }
 }

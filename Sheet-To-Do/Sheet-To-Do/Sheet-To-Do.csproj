@@ -126,6 +126,10 @@
     <Compile Include="Migrations\201708011154428_MakeTitleBeNotNull.Designer.cs">
       <DependentUpon>201708011154428_MakeTitleBeNotNull.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708030939195_Add Archived.cs" />
+    <Compile Include="Migrations\201708030939195_Add Archived.Designer.cs">
+      <DependentUpon>201708030939195_Add Archived.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\SheetToDoContext.cs" />
     <Compile Include="Models\Task.cs" />
@@ -158,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708011154428_MakeTitleBeNotNull.resx">
       <DependentUpon>201708011154428_MakeTitleBeNotNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708030939195_Add Archived.resx">
+      <DependentUpon>201708030939195_Add Archived.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
