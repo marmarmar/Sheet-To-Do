@@ -57,7 +57,7 @@ namespace Sheet_To_Do.Controllers
         }
 
         [HttpPost]
-        
+        [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Title,Description,Done")] Task task)
         {
             if (ModelState.IsValid)
