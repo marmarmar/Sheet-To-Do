@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -35,5 +36,41 @@ namespace Sheet_To_Do.Controllers
 
             }
         }
+
+
+        // GET:
+        public ActionResult Edit(int? id)
+        {
+            using (var db = new SheetToDoContext())
+            {
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                Task task = db.Tasks.Find(id);
+                if (task == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(task);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ID,Title,Description,Done")] Task task)
+        {
+            if (ModelState.IsValid)
+                using (var db = new SheetToDoContext())
+                {
+                db.Entry(task).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(task);
+        }
+
+
+
     }
 }
