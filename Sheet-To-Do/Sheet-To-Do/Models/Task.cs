@@ -15,5 +15,19 @@ namespace Sheet_To_Do.Models
 
         public string Description { get; set; }
         public bool Done { get; set; }
+
+        public Task()
+        {
+
+        }
+
+        public Task(string taskTitleUnformatted)
+        {
+            // taskTitleUnformatted - because it can containt date/time
+
+            // there shoud be method do format title and return only it without date/time etc
+            Title = taskTitleUnformatted;
+            Done = false;
+        }
     }
 }
