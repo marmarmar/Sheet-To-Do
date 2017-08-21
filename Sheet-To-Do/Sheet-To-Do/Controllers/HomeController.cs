@@ -10,6 +10,8 @@ namespace Sheet_To_Do.Controllers
 {
     public class HomeController : Controller
     {
+        private SheetToDoContext db = new SheetToDoContext();
+
         // GET: Home
         public ActionResult Index()
         {
@@ -36,7 +38,6 @@ namespace Sheet_To_Do.Controllers
 
             }
         }
-
 
         // GET:
         public ActionResult Edit(int? id)
@@ -70,7 +71,14 @@ namespace Sheet_To_Do.Controllers
             return View(task);
         }
 
-
+        [HttpPost]
+        public ActionResult Create(string newTaskText)
+        {
+            Task task = new Task(newTaskText);
+            db.Tasks.Add(task);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
     }
 }
