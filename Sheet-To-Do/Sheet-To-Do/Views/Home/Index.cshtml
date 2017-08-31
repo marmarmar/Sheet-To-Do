@@ -27,6 +27,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Done)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </th>
         <th></th>
     </tr>
 
@@ -42,6 +45,9 @@
             @if(item.Done) {@Html.ActionLink("Done", "ChangeState", new { id = item.Id })}
             @if (!item.Done){@Html.ActionLink("Not Done", "ChangeState", new { id = item.Id })}
 
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
