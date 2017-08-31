@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Chronic;
 using Sheet_To_Do.Models;
 
 namespace Sheet_To_Do.Controllers
@@ -11,6 +12,7 @@ namespace Sheet_To_Do.Controllers
     public class HomeController : Controller
     {
         private SheetToDoContext db = new SheetToDoContext();
+        private Parser parser = new Parser(new Options { FirstDayOfWeek = DayOfWeek.Monday });
 
         // GET: Home
         public ActionResult Index()
@@ -73,10 +75,15 @@ namespace Sheet_To_Do.Controllers
 
         [HttpPost]
         public ActionResult Create(string newTaskText)
-        {
-            Task task = new Task(newTaskText);
-            db.Tasks.Add(task);
+        {  
+            try
+            {
+            db.Tasks.Add(new Task(parser.ParseToTask(newTaskText)));
             db.SaveChanges();
+            }catch(ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+            }
             return RedirectToAction("Index");
         }
 
