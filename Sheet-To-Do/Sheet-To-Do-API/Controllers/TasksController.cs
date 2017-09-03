@@ -80,6 +80,7 @@ namespace Sheet_To_Do_API.Controllers
                 return BadRequest(ModelState);
             }
 
+            task.ParseTimeFromTaskTitle();
             db.Tasks.Add(task);
             db.SaveChanges();
 

@@ -10,7 +10,7 @@ namespace Sheet_To_Do.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "Sheet_To_Do.Models.SheetToDoContext";
         }
 
