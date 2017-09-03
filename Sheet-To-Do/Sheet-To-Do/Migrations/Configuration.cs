@@ -10,17 +10,17 @@ namespace Sheet_To_Do.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "Sheet_To_Do.Models.SheetToDoContext";
         }
 
         protected override void Seed(Sheet_To_Do.Models.SheetToDoContext context)
         {
                 context.Tasks.AddOrUpdate(
-                  new Task { Title = "Go to codecool" },
-                  new Task { Title = "Buy some milk" },
-                  new Task { Title = "Go to movie" },
-                  new Task { Title = "Create over app" }
+                  new Task("Go to codecool" ),
+                  new Task("Buy some milk"),
+                  new Task("Go to movie"),
+                  new Task("Create over app")
                 );
 
         }
