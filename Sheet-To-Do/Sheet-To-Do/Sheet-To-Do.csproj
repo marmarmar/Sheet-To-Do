@@ -137,6 +137,9 @@
     <Compile Include="Migrations\201708302019526_AddDueDateToTaskDateTime2.cs" />
     <Compile Include="Migrations\201708302019526_AddDueDateToTaskDateTime2.Designer.cs">
       <DependentUpon>201708302019526_AddDueDateToTaskDateTime2.cs</DependentUpon>
+    <Compile Include="Migrations\201708030939195_Add Archived.cs" />
+    <Compile Include="Migrations\201708030939195_Add Archived.Designer.cs">
+      <DependentUpon>201708030939195_Add Archived.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\SheetToDoContext.cs" />
@@ -176,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708302019526_AddDueDateToTaskDateTime2.resx">
       <DependentUpon>201708302019526_AddDueDateToTaskDateTime2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708030939195_Add Archived.resx">
+      <DependentUpon>201708030939195_Add Archived.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

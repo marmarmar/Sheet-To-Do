@@ -18,10 +18,10 @@ namespace Sheet_To_Do.Models
         public DateTime? DueDate { get; set; }
         public string Description { get; set; }
         public bool Done { get; set; }
+        public bool Archived { get; set; }
 
         public Task()
         {
-           
             Done = false;
         }
 
@@ -40,5 +40,6 @@ namespace Sheet_To_Do.Models
             
             Done = false;
         }
+        
     }
 }
