@@ -17,10 +17,10 @@ namespace Sheet_To_Do.Migrations
         protected override void Seed(Sheet_To_Do.Models.SheetToDoContext context)
         {
                 context.Tasks.AddOrUpdate(
-                  new Task("Go to codecool" ),
-                  new Task("Buy some milk"),
-                  new Task("Go to movie"),
-                  new Task("Create over app")
+                  new Task { Title = "Go to codecool" },
+                  new Task { Title = "Buy some milk" },
+                  new Task { Title = "Go to movie" },
+                  new Task { Title = "Create over app" }
                 );
 
         }
