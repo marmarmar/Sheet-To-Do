@@ -22,6 +22,12 @@ namespace Sheet_To_Do.Migrations
                   new Task { Title = "Go to movie" },
                   new Task { Title = "Create over app" }
                 );
+                context.Users.AddOrUpdate(
+                   new User { Login = "Stefan", Password = "kkk"},
+                   new User { Login = "Monika", Password = "kkk"},
+                   new User { Login = "Diana", Password = "kkk"},
+                   new User { Login = "Maria", Password = "kkk"}
+                );
 
         }
     }
