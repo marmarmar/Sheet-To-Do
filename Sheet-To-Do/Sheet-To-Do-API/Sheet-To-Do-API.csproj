@@ -108,6 +108,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\SheetToDoContext.cs" />
     <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\TaskCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
