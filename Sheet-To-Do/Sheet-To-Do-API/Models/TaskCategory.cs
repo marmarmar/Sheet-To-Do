@@ -9,7 +9,7 @@ namespace Sheet_To_Do.Models
     {
         public int TaskCategoryId { get; set; }
 
-        public int Name { get; set; }
+        public string Name { get; set; }
         public virtual List<Task> Tasks { get; set; }
 
     }
