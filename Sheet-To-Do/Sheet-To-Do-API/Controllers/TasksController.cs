@@ -47,7 +47,7 @@ namespace Sheet_To_Do_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != task.Id)
+            if (id != task.TaskId)
             {
                 return BadRequest();
             }
@@ -86,7 +86,7 @@ namespace Sheet_To_Do_API.Controllers
             db.Tasks.Add(task);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = task.Id }, task);
+            return CreatedAtRoute("DefaultApi", new { id = task.TaskId }, task);
         }
 
         // DELETE: api/Tasks/5
@@ -116,7 +116,7 @@ namespace Sheet_To_Do_API.Controllers
 
         private bool TaskExists(int id)
         {
-            return db.Tasks.Count(e => e.Id == id) > 0;
+            return db.Tasks.Count(e => e.TaskId == id) > 0;
         }
     }
 }

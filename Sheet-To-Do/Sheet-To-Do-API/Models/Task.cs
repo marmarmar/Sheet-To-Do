@@ -10,7 +10,7 @@ namespace Sheet_To_Do.Models
 {
     public class Task
     {
-        public int Id { get; set; }
+        public int TaskId { get; set; }
 
         [Required(ErrorMessage = "Title is required.")]
         public string Title { get; set; }
