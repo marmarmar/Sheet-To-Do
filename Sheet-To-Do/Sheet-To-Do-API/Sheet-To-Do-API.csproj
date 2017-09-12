@@ -105,6 +105,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709121255031_AddTaskCategory.cs" />
+    <Compile Include="Migrations\201709121255031_AddTaskCategory.Designer.cs">
+      <DependentUpon>201709121255031_AddTaskCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709121303154_ChangeNamePropertyInTaskCategoryToString.cs" />
+    <Compile Include="Migrations\201709121303154_ChangeNamePropertyInTaskCategoryToString.Designer.cs">
+      <DependentUpon>201709121303154_ChangeNamePropertyInTaskCategoryToString.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\SheetToDoContext.cs" />
     <Compile Include="Models\Task.cs" />
@@ -122,6 +130,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709121255031_AddTaskCategory.resx">
+      <DependentUpon>201709121255031_AddTaskCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709121303154_ChangeNamePropertyInTaskCategoryToString.resx">
+      <DependentUpon>201709121303154_ChangeNamePropertyInTaskCategoryToString.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
