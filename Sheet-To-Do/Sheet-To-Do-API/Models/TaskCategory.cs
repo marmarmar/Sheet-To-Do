@@ -10,6 +10,7 @@ namespace Sheet_To_Do.Models
         public int TaskCategoryId { get; set; }
 
         public string Name { get; set; }
+        public User User { get; set; }
         public List<Task> Tasks { get; set; }
 
     }
