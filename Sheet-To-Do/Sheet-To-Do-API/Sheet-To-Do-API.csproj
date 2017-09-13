@@ -105,9 +105,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709121229079_AddUserModel.cs" />
-    <Compile Include="Migrations\201709121229079_AddUserModel.Designer.cs">
-      <DependentUpon>201709121229079_AddUserModel.cs</DependentUpon>
+    <Compile Include="Migrations\201709131058336_AddUserModel.cs" />
+    <Compile Include="Migrations\201709131058336_AddUserModel.Designer.cs">
+      <DependentUpon>201709131058336_AddUserModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\User.cs" />
@@ -128,8 +128,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709121229079_AddUserModel.resx">
-      <DependentUpon>201709121229079_AddUserModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709131058336_AddUserModel.resx">
+      <DependentUpon>201709131058336_AddUserModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

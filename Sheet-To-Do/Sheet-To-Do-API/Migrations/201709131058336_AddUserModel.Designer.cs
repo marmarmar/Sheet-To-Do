@@ -13,7 +13,7 @@ namespace Sheet_To_Do.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201709121229079_AddUserModel"; }
+            get { return "201709131058336_AddUserModel"; }
         }
         
         string IMigrationMetadata.Source

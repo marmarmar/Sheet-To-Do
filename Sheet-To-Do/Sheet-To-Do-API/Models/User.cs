@@ -16,6 +16,6 @@ namespace Sheet_To_Do.Models
         public string Login { get; set; }
 
         [Required(ErrorMessage = "Password is required.")]
-        public string Password;
+        public string Password { get; set; }
     }
 }
