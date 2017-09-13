@@ -18,6 +18,8 @@ namespace Sheet_To_Do.Models
         public DateTime? DueDate { get; set; }
         public string Description { get; set; }
         public bool Done { get; set; }
+        public User User { get; set; }
+
     
         public TaskCategory TaskCategory { get; set; }
 
