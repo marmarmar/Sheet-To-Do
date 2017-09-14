@@ -22,7 +22,8 @@ namespace Sheet_To_Do_API.Controllers
         // GET: api/Tasks
         public IQueryable<Task> GetTasks()
         {
-            return db.Tasks;
+            var tasks = db.Tasks.Where(a => !a.IsArchived);
+            return tasks;
         }
 
         // GET: api/Tasks/5
