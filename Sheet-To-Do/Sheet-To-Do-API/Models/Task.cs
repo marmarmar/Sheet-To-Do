@@ -10,7 +10,7 @@ namespace Sheet_To_Do.Models
 {
     public class Task
     {
-        public int Id { get; set; }
+        public int TaskId { get; set; }
 
         [Required(ErrorMessage = "Title is required.")]
         public string Title { get; set; }
@@ -19,6 +19,9 @@ namespace Sheet_To_Do.Models
         public string Description { get; set; }
         public bool Done { get; set; }
         public User User { get; set; }
+
+    
+        public TaskCategory TaskCategory { get; set; }
 
         public void ParseTimeFromTaskTitle()
         {

@@ -7,52 +7,49 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using Sheet_To_Do.Models;
 
 namespace Sheet_To_Do_API.Controllers
 {
-    [RoutePrefix("api/Tasks")]
-    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
-    public class TasksController : ApiController
+    public class TaskCategoriesController : ApiController
     {
         private SheetToDoContext db = new SheetToDoContext();
 
-        // GET: api/Tasks
-        public IQueryable<Task> GetTasks()
+        // GET: api/TaskCategories
+        public IQueryable<TaskCategory> GetTaskCategories()
         {
-            return db.Tasks;
+            return db.TaskCategories.Include("Tasks");
         }
 
-        // GET: api/Tasks/5
-        [ResponseType(typeof(Task))]
-        public IHttpActionResult GetTask(int id)
+        // GET: api/TaskCategories/5
+        [ResponseType(typeof(TaskCategory))]
+        public IHttpActionResult GetTaskCategory(int id)
         {
-            Task task = db.Tasks.Find(id);
-            if (task == null)
+            TaskCategory taskCategory = db.TaskCategories.Find(id);
+            if (taskCategory == null)
             {
                 return NotFound();
             }
 
-            return Ok(task);
+            return Ok(taskCategory);
         }
 
-        // PUT: api/Tasks/5
+        // PUT: api/TaskCategories/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutTask(int id, Task task)
+        public IHttpActionResult PutTaskCategory(int id, TaskCategory taskCategory)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != task.TaskId)
+            if (id != taskCategory.TaskCategoryId)
             {
                 return BadRequest();
             }
 
-            db.Entry(task).State = EntityState.Modified;
+            db.Entry(taskCategory).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +57,7 @@ namespace Sheet_To_Do_API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TaskExists(id))
+                if (!TaskCategoryExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +70,35 @@ namespace Sheet_To_Do_API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Tasks
-        [ResponseType(typeof(Task))]
-        public IHttpActionResult PostTask(Task task)
+        // POST: api/TaskCategories
+        [ResponseType(typeof(TaskCategory))]
+        public IHttpActionResult PostTaskCategory(TaskCategory taskCategory)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            task.ParseTimeFromTaskTitle();
-            db.Tasks.Add(task);
+            db.TaskCategories.Add(taskCategory);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = task.TaskId }, task);
+            return CreatedAtRoute("DefaultApi", new { id = taskCategory.TaskCategoryId }, taskCategory);
         }
 
-        // DELETE: api/Tasks/5
-        [ResponseType(typeof(Task))]
-        public IHttpActionResult DeleteTask(int id)
+        // DELETE: api/TaskCategories/5
+        [ResponseType(typeof(TaskCategory))]
+        public IHttpActionResult DeleteTaskCategory(int id)
         {
-            Task task = db.Tasks.Find(id);
-            if (task == null)
+            TaskCategory taskCategory = db.TaskCategories.Find(id);
+            if (taskCategory == null)
             {
                 return NotFound();
             }
 
-            db.Tasks.Remove(task);
+            db.TaskCategories.Remove(taskCategory);
             db.SaveChanges();
 
-            return Ok(task);
+            return Ok(taskCategory);
         }
 
         protected override void Dispose(bool disposing)
@@ -114,9 +110,9 @@ namespace Sheet_To_Do_API.Controllers
             base.Dispose(disposing);
         }
 
-        private bool TaskExists(int id)
+        private bool TaskCategoryExists(int id)
         {
-            return db.Tasks.Count(e => e.TaskId == id) > 0;
+            return db.TaskCategories.Count(e => e.TaskCategoryId == id) > 0;
         }
     }
 }
