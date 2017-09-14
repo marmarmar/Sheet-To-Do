@@ -25,6 +25,15 @@ namespace Sheet_To_Do_API.Controllers
             return db.Tasks;
         }
 
+        // GET: api/Tasks by category
+        [ResponseType(typeof(List<Task>))]
+        public IHttpActionResult GetTasksByTaskCategory([FromUri] int taskCategoryId)
+        {
+            var tasks = db.Tasks.Where(x => x.TaskCategory.TaskCategoryId == taskCategoryId).AsNoTracking();
+            return Ok(tasks);
+        }
+
+
         // GET: api/Tasks/5
         [ResponseType(typeof(Task))]
         public IHttpActionResult GetTask(int id)
