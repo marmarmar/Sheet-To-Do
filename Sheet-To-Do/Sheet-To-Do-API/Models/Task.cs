@@ -19,9 +19,8 @@ namespace Sheet_To_Do.Models
         public string Description { get; set; }
         public bool Done { get; set; }
         public User User { get; set; }
-
-    
         public TaskCategory TaskCategory { get; set; }
+        public bool IsArchived { get; set; }
 
         public void ParseTimeFromTaskTitle()
         {
