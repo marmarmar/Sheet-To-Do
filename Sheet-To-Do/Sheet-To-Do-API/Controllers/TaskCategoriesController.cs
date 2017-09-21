@@ -7,11 +7,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using Sheet_To_Do.Models;
 
 namespace Sheet_To_Do_API.Controllers
 {
+    [EnableCors(origins: "http://localhost:4200,https://tokarskadiana.github.io", headers: "*", methods: "*")]
     public class TaskCategoriesController : ApiController
     {
         private SheetToDoContext db = new SheetToDoContext();

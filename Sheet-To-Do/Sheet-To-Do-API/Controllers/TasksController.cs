@@ -13,8 +13,8 @@ using Sheet_To_Do.Models;
 
 namespace Sheet_To_Do_API.Controllers
 {
-    [RoutePrefix("api/Tasks")]
-    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+    //[RoutePrefix("api/Tasks")]
+    [EnableCors(origins: "http://localhost:4200,https://tokarskadiana.github.io", headers: "*", methods: "*")]
     public class TasksController : ApiController
     {
         private SheetToDoContext db = new SheetToDoContext();
@@ -24,6 +24,7 @@ namespace Sheet_To_Do_API.Controllers
         {
             return db.Tasks;
         }
+
 
         // GET: api/Tasks/5
         [ResponseType(typeof(Task))]
