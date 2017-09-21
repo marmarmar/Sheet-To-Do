@@ -115,10 +115,6 @@
     <Compile Include="Migrations\201709141907005_InitialCreate.Designer.cs">
       <DependentUpon>201709141907005_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709141206437_AddTables.cs" />
-    <Compile Include="Migrations\201709141206437_AddTables.Designer.cs">
-      <DependentUpon>201709141206437_AddTables.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201709141235113_AddIsArchivedToTask.cs" />
     <Compile Include="Migrations\201709141235113_AddIsArchivedToTask.Designer.cs">
       <DependentUpon>201709141235113_AddIsArchivedToTask.cs</DependentUpon>
@@ -147,9 +143,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709141907005_InitialCreate.resx">
       <DependentUpon>201709141907005_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709141206437_AddTables.resx">
-      <DependentUpon>201709141206437_AddTables.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709141235113_AddIsArchivedToTask.resx">
       <DependentUpon>201709141235113_AddIsArchivedToTask.cs</DependentUpon>
