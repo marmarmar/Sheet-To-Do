@@ -19,6 +19,13 @@ namespace Sheet_To_Do.Migrations
             
             User user1 = new User { Login = "Stefan", Password = "kkk" };
             User user2 = new User { Login = "Maria", Password = "kkk" };
+            User user3 = new User { Login = "Monika", Password = "kkk" };
+            User user4 = new User { Login = "Diana", Password = "kkk" };
+
+            context.Users.AddOrUpdate(
+                user3,
+                user4
+            );
 
             var taskCategory1 = new TaskCategory { Name = "Birthday", User = user1 };
             var taskCategory2 = new TaskCategory { Name = "D-Day", User = user2 };
