@@ -1,12 +1,9 @@
-namespace Sheet_To_Do.Migrations
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-    using Sheet_To_Do.Models;
+using System.Data.Entity.Migrations;
+using Sheet_To_Do_API.Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Sheet_To_Do.Models.SheetToDoContext>
+namespace Sheet_To_Do_API.Migrations
+{
+    internal sealed class Configuration : DbMigrationsConfiguration<SheetToDoContext>
     {
         public Configuration()
         {
@@ -14,7 +11,7 @@ namespace Sheet_To_Do.Migrations
             ContextKey = "Sheet_To_Do.Models.SheetToDoContext";
         }
 
-        protected override void Seed(Sheet_To_Do.Models.SheetToDoContext context)
+        protected override void Seed(SheetToDoContext context)
         {
             
             User user1 = new User { Login = "Stefan", Password = "kkk" };
