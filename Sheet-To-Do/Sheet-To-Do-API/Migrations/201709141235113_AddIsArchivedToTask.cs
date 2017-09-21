@@ -1,8 +1,7 @@
-namespace Sheet_To_Do.Migrations
+using System.Data.Entity.Migrations;
+
+namespace Sheet_To_Do_API.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class AddIsArchivedToTask : DbMigration
     {
         public override void Up()
