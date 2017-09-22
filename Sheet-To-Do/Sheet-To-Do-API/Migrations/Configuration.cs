@@ -8,7 +8,7 @@ namespace Sheet_To_Do_API.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "Sheet_To_Do.Models.SheetToDoContext";
+            ContextKey = "Sheet_To_Do_API.Models.SheetToDoContext";
         }
 
         protected override void Seed(SheetToDoContext context)
