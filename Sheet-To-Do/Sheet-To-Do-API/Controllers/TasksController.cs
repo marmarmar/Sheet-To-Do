@@ -9,12 +9,13 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
-using Sheet_To_Do.Models;
+using Marvin.JsonPatch;
+using Sheet_To_Do_API.Models;
 
 namespace Sheet_To_Do_API.Controllers
 {
-    [RoutePrefix("api/Tasks")]
-    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+    //[RoutePrefix("api/Tasks")]
+    [EnableCors(origins: "http://localhost:4200,https://tokarskadiana.github.io", headers: "*", methods: "*")]
     public class TasksController : ApiController
     {
         private SheetToDoContext db = new SheetToDoContext();
@@ -22,17 +23,18 @@ namespace Sheet_To_Do_API.Controllers
         // GET: api/Tasks
         public IQueryable<Task> GetTasks()
         {
-            return db.Tasks;
+            var tasks = db.Tasks.Where(a => !a.IsArchived);
+            return tasks;
         }
 
-        // GET: api/Tasks by category
+        // GET: api/Tasks 
+        // by category
         [ResponseType(typeof(List<Task>))]
         public IHttpActionResult GetTasksByTaskCategory([FromUri] int taskCategoryId)
         {
             var tasks = db.Tasks.Where(x => x.TaskCategory.TaskCategoryId == taskCategoryId).AsNoTracking();
             return Ok(tasks);
         }
-
 
         // GET: api/Tasks/5
         [ResponseType(typeof(Task))]
@@ -44,6 +46,22 @@ namespace Sheet_To_Do_API.Controllers
                 return NotFound();
             }
 
+            return Ok(task);
+        }
+
+        // PATCH: api/Tasks/5
+        [ResponseType(typeof(Task))]
+        public IHttpActionResult PatchTask(int id, [FromBody]JsonPatchDocument<Task> taskPatchDocument)
+        {
+            var task = db.Tasks.Find(id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            // apply the patch document 
+            taskPatchDocument.ApplyTo(task);
+            db.SaveChanges();
             return Ok(task);
         }
 

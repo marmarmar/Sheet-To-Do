@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 using Chronic;
 
-namespace Sheet_To_Do.Models
+namespace Sheet_To_Do_API.Models
 {
     public class Task
     {
@@ -19,9 +16,8 @@ namespace Sheet_To_Do.Models
         public string Description { get; set; }
         public bool Done { get; set; }
         public User User { get; set; }
-
-    
         public TaskCategory TaskCategory { get; set; }
+        public bool IsArchived { get; set; }
 
         public void ParseTimeFromTaskTitle()
         {
