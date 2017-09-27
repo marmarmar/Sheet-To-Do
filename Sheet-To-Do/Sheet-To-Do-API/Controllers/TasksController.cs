@@ -21,9 +21,9 @@ namespace Sheet_To_Do_API.Controllers
         private SheetToDoContext db = new SheetToDoContext();
 
         // GET: api/Tasks
-        public IQueryable<Task> GetTasks()
+        public IQueryable<Task> GetTasks([FromUri] int userId)
         {
-            var tasks = db.Tasks.Where(a => !a.IsArchived);
+            var tasks = db.Tasks.Where(a => a.User.UserId == userId && !a.IsArchived);
             return tasks;
         }
 
@@ -102,16 +102,27 @@ namespace Sheet_To_Do_API.Controllers
 
         // POST: api/Tasks
         [ResponseType(typeof(Task))]
-        public IHttpActionResult PostTask(Task task)
+        public IHttpActionResult PostTask(Task task, [FromUri] int userId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            var user = db.Users.SingleOrDefault(u => u.UserId == userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            task.User = user;
             task.ParseTimeFromTaskTitle();
             db.Tasks.Add(task);
             db.SaveChanges();
+
+            //TODO json ignore user property in model
+            task.User = null;
 
             return CreatedAtRoute("DefaultApi", new { id = task.TaskId }, task);
         }

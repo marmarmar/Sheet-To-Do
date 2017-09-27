@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sheet_To_Do_API.Models
 {
@@ -11,5 +12,21 @@ namespace Sheet_To_Do_API.Models
 
         [Required(ErrorMessage = "Password is required.")]
         public string Password { get; set; }
+    }
+
+    public class UserView
+    {
+        public int UserId { get; set; }
+        public string Login { get; set; }
+
+        public static explicit operator UserView(User v)
+        {
+            var userView = new UserView
+            {
+                UserId = v.UserId, 
+                Login = v.Login
+            };
+            return userView;
+        }
     }
 }
