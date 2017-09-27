@@ -22,10 +22,16 @@ namespace Sheet_To_Do_API.Models
         public void ParseTimeFromTaskTitle()
         {
             Parser parser = new Parser(new Options { FirstDayOfWeek = DayOfWeek.Monday });
-            var baseTask = parser.ParseToTask(Title);
-            //information in baseTask field, im find something?
-            Title = baseTask.Title;
-            DueDate = baseTask.DueDate;
+            try
+            {
+                var baseTask = parser.ParseToTask(Title);
+                Title = baseTask.Title;
+                DueDate = baseTask.DueDate;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 
