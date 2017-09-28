@@ -19,14 +19,10 @@ namespace Sheet_To_Do_API.Models
         public int UserId { get; set; }
         public string Login { get; set; }
 
-        public static explicit operator UserView(User v)
+        public UserView(int userId, string login)
         {
-            var userView = new UserView
-            {
-                UserId = v.UserId, 
-                Login = v.Login
-            };
-            return userView;
+            UserId = userId;
+            Login = login;
         }
     }
 }

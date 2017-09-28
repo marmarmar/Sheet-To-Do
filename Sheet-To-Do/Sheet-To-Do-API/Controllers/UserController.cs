@@ -17,7 +17,7 @@ namespace Sheet_To_Do_API.Controllers
                 var user = db.Users.SingleOrDefault(u => u.Login.Equals(login) && u.Password.Equals(password));
                 if (user != null)
                 {
-                    return Ok((UserView)user);
+                    return Ok(new UserView(user.UserId, user.Login));
                 }
                 return NotFound();
             }
