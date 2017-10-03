@@ -19,9 +19,9 @@ namespace Sheet_To_Do_API.Controllers
         private SheetToDoContext db = new SheetToDoContext();
 
         // GET: api/TaskCategories
-        public IQueryable<TaskCategory> GetTaskCategories()
+        public IQueryable<TaskCategory> GetTaskCategories([FromUri] int userId)
         {
-            return db.TaskCategories.Include("Tasks");
+            return db.TaskCategories.Where(x => x.User.UserId == userId);
         }
 
         // GET: api/TaskCategories/5
@@ -74,15 +74,26 @@ namespace Sheet_To_Do_API.Controllers
 
         // POST: api/TaskCategories
         [ResponseType(typeof(TaskCategory))]
-        public IHttpActionResult PostTaskCategory(TaskCategory taskCategory)
+        public IHttpActionResult PostTaskCategory(TaskCategory taskCategory, [FromUri] int userId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            var user = db.Users.SingleOrDefault(u => u.UserId == userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            taskCategory.User = user;
             db.TaskCategories.Add(taskCategory);
             db.SaveChanges();
+
+            //TODO json ignore user property in model
+            taskCategory.User = null;
 
             return CreatedAtRoute("DefaultApi", new { id = taskCategory.TaskCategoryId }, taskCategory);
         }
