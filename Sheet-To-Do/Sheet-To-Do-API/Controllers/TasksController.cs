@@ -27,12 +27,24 @@ namespace Sheet_To_Do_API.Controllers
             return tasks;
         }
 
-        // GET: api/Tasks 
+        // GET: api/Tasks?userid=
         // by category
         [ResponseType(typeof(List<Task>))]
         public IHttpActionResult GetTasksByTaskCategory([FromUri] int taskCategoryId)
         {
             var tasks = db.Tasks.Where(x => x.TaskCategory.TaskCategoryId == taskCategoryId).AsNoTracking();
+            return Ok(tasks);
+        }
+
+        // GET: api/Tasks?userId= &startDate= &endDate=
+        // by date
+        [ResponseType(typeof(List<Task>))]
+        public IHttpActionResult GetTasksByDate([FromUri] int userId, [FromUri] DateTime startDate, [FromUri] DateTime endDate)
+        {
+            var tasks = db.Tasks.
+                Where(x => x.User.UserId == userId).
+                Where(x => x.DueDate >= startDate && x.DueDate <= endDate).
+                AsNoTracking();
             return Ok(tasks);
         }
 
