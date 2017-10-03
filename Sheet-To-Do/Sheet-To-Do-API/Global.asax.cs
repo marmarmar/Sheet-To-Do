@@ -13,7 +13,6 @@ namespace Sheet_To_Do_API
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.Re‌​ferenceLoopHandling = ReferenceLoopHandling.Ignore;
         }
     }
 }
