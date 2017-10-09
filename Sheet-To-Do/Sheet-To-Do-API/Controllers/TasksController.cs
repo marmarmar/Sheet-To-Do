@@ -39,7 +39,7 @@ namespace Sheet_To_Do_API.Controllers
         // GET: api/Tasks?userId= &startDate= &endDate=
         // by date
         [ResponseType(typeof(List<Task>))]
-        public IHttpActionResult GetTasksByDate([FromUri] int userId, [FromUri] DateTime startDate, [FromUri] DateTime endDate)
+        public IHttpActionResult GetTasksByDateRange([FromUri] int userId, [FromUri] DateTime startDate, [FromUri] DateTime endDate)
         {
             var tasks = db.Tasks.
                 Where(x => x.User.UserId == userId).
