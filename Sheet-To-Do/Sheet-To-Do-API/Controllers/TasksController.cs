@@ -23,7 +23,9 @@ namespace Sheet_To_Do_API.Controllers
         // GET: api/Tasks
         public IQueryable<Task> GetTasks([FromUri] int userId)
         {
-            var tasks = db.Tasks.Where(a => a.User.UserId == userId && !a.IsArchived);
+            var tasks = db.Tasks
+                .Where(x => x.User.UserId == userId)
+                .Where(x => !x.IsArchived);
             return tasks;
         }
 
@@ -32,7 +34,10 @@ namespace Sheet_To_Do_API.Controllers
         [ResponseType(typeof(List<Task>))]
         public IHttpActionResult GetTasksByTaskCategory([FromUri] int taskCategoryId)
         {
-            var tasks = db.Tasks.Where(x => x.TaskCategory.TaskCategoryId == taskCategoryId).AsNoTracking();
+            var tasks = db.Tasks
+                .Where(x => x.TaskCategory.TaskCategoryId == taskCategoryId)
+                .Where(x => !x.IsArchived)
+                .AsNoTracking();
             return Ok(tasks);
         }
 
@@ -41,10 +46,11 @@ namespace Sheet_To_Do_API.Controllers
         [ResponseType(typeof(List<Task>))]
         public IHttpActionResult GetTasksByDateRange([FromUri] int userId, [FromUri] DateTime startDate, [FromUri] DateTime endDate)
         {
-            var tasks = db.Tasks.
-                Where(x => x.User.UserId == userId).
-                Where(x => x.DueDate >= startDate && x.DueDate <= endDate).
-                AsNoTracking();
+            var tasks = db.Tasks
+                .Where(x => x.User.UserId == userId)
+                .Where(x => x.DueDate >= startDate && x.DueDate <= endDate)
+                .Where(x => !x.IsArchived)
+                .AsNoTracking();
             return Ok(tasks);
         }
 
