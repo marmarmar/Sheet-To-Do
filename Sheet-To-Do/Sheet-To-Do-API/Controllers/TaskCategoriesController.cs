@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
@@ -13,29 +12,21 @@ namespace Sheet_To_Do_API.Controllers
     [EnableCors(origins: "http://localhost:4200,https://tokarskadiana.github.io", headers: "*", methods: "*")]
     public class TaskCategoriesController : ApiController
     {
-        private SheetToDoContext db = new SheetToDoContext();
+        private readonly SheetToDoContext _db = new SheetToDoContext();
 
-        // GET: api/TaskCategories
-        /// <summary>
         /// todo czy nie lepiej użyć DTO?
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
         public IQueryable<TaskCategory> GetTaskCategories([FromUri] int userId)
         {
-            return db.TaskCategories.Where(x => x.User.UserId == userId);
+            return _db.TaskCategories.Where(x => x.User.UserId == userId);
         }
 
         // GET: api/TaskCategories/5
         [ResponseType(typeof(TaskCategory))]
         public IHttpActionResult GetTaskCategory(int id)
         {
-            var taskCategory = db.TaskCategories.Find(id);
+            var taskCategory = _db.TaskCategories.Find(id);
             if (taskCategory == null)
-            {
                 return NotFound();
-            }
-
             return Ok(taskCategory);
         }
 
@@ -44,30 +35,20 @@ namespace Sheet_To_Do_API.Controllers
         public IHttpActionResult PutTaskCategory(int id, TaskCategory taskCategory)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
-
             if (id != taskCategory.TaskCategoryId)
-            {
                 return BadRequest();
-            }
-
-            db.Entry(taskCategory).State = EntityState.Modified;
-
+            _db.Entry(taskCategory).State = EntityState.Modified;
             try
             {
-                db.SaveChanges();
+                _db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException ex)
             {
                 if (!TaskCategoryExists(id))
-                {
                     return NotFound();
-                }
                 return InternalServerError(ex); //todo zwrócić 500
             }
-
             return StatusCode(HttpStatusCode.NoContent);
         }
 
@@ -76,24 +57,15 @@ namespace Sheet_To_Do_API.Controllers
         public IHttpActionResult PostTaskCategory(TaskCategory taskCategory, [FromUri] int userId)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
-
-            var user = db.Users.SingleOrDefault(u => u.UserId == userId);
-
+            var user = _db.Users.SingleOrDefault(u => u.UserId == userId);
             if (user == null)
-            {
                 return NotFound();
-            }
-
             taskCategory.User = user;
-            db.TaskCategories.Add(taskCategory);
-            db.SaveChanges();
-
+            _db.TaskCategories.Add(taskCategory);
+            _db.SaveChanges();
             //TODO json ignore user property in model
             taskCategory.User = null;
-
             return CreatedAtRoute("DefaultApi", new { id = taskCategory.TaskCategoryId }, taskCategory);
         }
 
@@ -101,30 +73,24 @@ namespace Sheet_To_Do_API.Controllers
         [ResponseType(typeof(TaskCategory))]
         public IHttpActionResult DeleteTaskCategory(int id)
         {
-            TaskCategory taskCategory = db.TaskCategories.Find(id);
+            var taskCategory = _db.TaskCategories.Find(id);
             if (taskCategory == null)
-            {
                 return NotFound();
-            }
-
-            db.TaskCategories.Remove(taskCategory);
-            db.SaveChanges();
-
+            _db.TaskCategories.Remove(taskCategory);
+            _db.SaveChanges();
             return Ok(taskCategory);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
-                db.Dispose();
-            }
+                _db.Dispose();
             base.Dispose(disposing);
         }
 
         private bool TaskCategoryExists(int id)
         {
-            return db.TaskCategories.Count(e => e.TaskCategoryId == id) > 0;
+            return _db.TaskCategories.Count(e => e.TaskCategoryId == id) > 0;
         }
     }
 }
