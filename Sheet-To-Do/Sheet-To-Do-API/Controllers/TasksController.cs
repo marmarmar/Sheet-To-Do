@@ -14,7 +14,6 @@ namespace Sheet_To_Do_API.Controllers
     [EnableCors(origins: "http://localhost:4200,https://tokarskadiana.github.io", headers: "*", methods: "*")]
     public class TasksController : ApiController
     {
-        // todo: zenkapsulować do ServerFacade
         private readonly ServerFacade _serverFacade = new ServerFacade();
 
         // GET: api/Tasks
@@ -45,9 +44,7 @@ namespace Sheet_To_Do_API.Controllers
         {
             var task = _serverFacade.FindTaskBy(id);
             if (task == null)
-            {
                 return NotFound();
-            }
             return Ok(task);
         }
 
@@ -57,9 +54,7 @@ namespace Sheet_To_Do_API.Controllers
         {
             var task = _serverFacade.FindTaskBy(id);
             if (task == null)
-            {
                 return NotFound();
-            }
             _serverFacade.Apply(taskPatchDocument, task);
             return Ok(task);
         }
@@ -100,9 +95,7 @@ namespace Sheet_To_Do_API.Controllers
         {
             var task = _serverFacade.FindTaskBy(id);
             if (task == null)
-            {
                 return NotFound();
-            }
             _serverFacade.DeleteTask(task);
             return Ok(task);
         }
@@ -110,9 +103,7 @@ namespace Sheet_To_Do_API.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 _serverFacade.Dispose();
-            }
             base.Dispose(disposing);
         }
 
