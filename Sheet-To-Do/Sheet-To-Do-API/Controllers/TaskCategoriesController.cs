@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+// todo usunąć zbędne referencje
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
@@ -19,6 +20,11 @@ namespace Sheet_To_Do_API.Controllers
         private SheetToDoContext db = new SheetToDoContext();
 
         // GET: api/TaskCategories
+        /// <summary>
+        /// todo czy nie lepiej użyć DTO?
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public IQueryable<TaskCategory> GetTaskCategories([FromUri] int userId)
         {
             return db.TaskCategories.Where(x => x.User.UserId == userId);
@@ -28,7 +34,7 @@ namespace Sheet_To_Do_API.Controllers
         [ResponseType(typeof(TaskCategory))]
         public IHttpActionResult GetTaskCategory(int id)
         {
-            TaskCategory taskCategory = db.TaskCategories.Find(id);
+            var taskCategory = db.TaskCategories.Find(id);
             if (taskCategory == null)
             {
                 return NotFound();
@@ -57,16 +63,13 @@ namespace Sheet_To_Do_API.Controllers
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
                 if (!TaskCategoryExists(id))
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                return InternalServerError(ex); //todo zwrócić 500
             }
 
             return StatusCode(HttpStatusCode.NoContent);

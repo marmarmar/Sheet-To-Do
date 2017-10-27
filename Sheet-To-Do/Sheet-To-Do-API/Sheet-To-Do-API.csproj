@@ -117,6 +117,7 @@
       <DependentUpon>201709141907005_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ServerFacade.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\SheetToDoContext.cs" />
     <Compile Include="Models\Task.cs" />

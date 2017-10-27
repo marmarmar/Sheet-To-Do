@@ -19,6 +19,10 @@ namespace Sheet_To_Do_API.Models
         public TaskCategory TaskCategory { get; set; }
         public bool IsArchived { get; set; }
 
+        /// <summary>
+        /// todo : borys - po co w obiekcie typu value data jakaś przyklejona metoda?
+        /// niech to będzie metoda prywatna ustawiana w setterze Title
+        /// </summary>
         public void ParseTimeFromTaskTitle()
         {
             Parser parser = new Parser(new Options { FirstDayOfWeek = DayOfWeek.Monday });

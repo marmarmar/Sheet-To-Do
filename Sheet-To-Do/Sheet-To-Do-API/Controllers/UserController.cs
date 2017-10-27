@@ -5,11 +5,17 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Sheet_To_Do_API.Models;
-
+// todo: usunąć zbędne usingi
 namespace Sheet_To_Do_API.Controllers
 {
     public class UserController : ApiController
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="password">TODO wygląda na to, że hasło jest przesyłane GET-em niezaszyfrowane, gdzie każdy może je podglądnąć</param>
+        /// <returns></returns>
         public IHttpActionResult GetUser([FromUri] string login, [FromUri] string password)
         {
             using (var db = new SheetToDoContext())
