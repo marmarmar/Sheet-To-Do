@@ -78,7 +78,7 @@ namespace Sheet_To_Do_API.Models
             {
                 _db.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException ex)
+            catch (DbUpdateConcurrencyException)
             {
                 return false;
             }
@@ -89,10 +89,10 @@ namespace Sheet_To_Do_API.Models
         {
             var user = _db.Users.SingleOrDefault(u => u.UserId == userId);          
             task.User = user;
-            task.ParseTimeFromTaskTitle();//todo to będzie zbędne gdy będzie setter
+//            task.ParseTimeFromTaskTitle();//todo to będzie zbędne gdy będzie setter
             _db.Tasks.Add(task);
             _db.SaveChanges();
-            task.User = null;//todo co to jest i po co takie dziwactwo?
+//            task.User = null;//todo co to jest i po co takie dziwactwo?
         }
     }
 }
